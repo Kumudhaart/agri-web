@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Profile Page</title>
+  <link rel="stylesheet" type="text/css" href="/Styles/fprofile.css">
+  <script src="https://kit.fontawesome.com/ee292cad92.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.1.0/papaparse.min.js"></script>
+
+
+
+  <script>
+    $(document).ready(function() {
+      $("#li1").click(function() {
+        $("#div1").show();
+        $("#div2,#div3,#div4,#div5").hide();
+      });
+      $("#li2").click(function() {
+        $("#div2").show();
+        $("#div1,#div3,#div4,#div5").hide();
+      });
+      $("#li3").click(function() {
+        $("#div3").show();
+        $("#div1,#div2,#div4,#div5").hide();
+      });
+      $("#li4").click(function() {
+        $("#div4").show();
+        $("#div1,#div2,#div3,#div5").hide();
+      });
+      $("#li5").click(function() {
+        $("#div5").show();
+        $("#div1,#div2,#div3,#div4").hide();
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <section class="left-section">
+      <div class="left">
+        <div class="go-back">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <div class="profile">
+          <img id="photo" class="profile-pic" src="images/profile.jpg" alt="profile_pic" />
+
+          <input type="file" id="file" />
+          <label for="file" id="uploadbtn">Choose Profile</label>
+        </div>
+        <div class="name">
+          <h1 class="h1">Username</h1>
+          <h4 class="h4">profession</h4>
+        </div>
+        <ul class="side-bar">
+          <li id="li1" class="side-bar-elements" href="/"><a style="text-decoration:none;color:white" href="/profile">Profile</a></li>
+          <li id="li2" class="side-bar-elements" href="/"><a style="text-decoration:none;color:white" href="/profile/account">Account Details</a></li>
+          <li id="li3" class="side-bar-elements" href="/"><a style="text-decoration:none;color:white"href="/profile/products">Products</a></li>
+          <li id="li4" class="side-bar-elements" href="/"><a style="text-decoration:none;color:white"href="/profile/sales">Sales</a></li>
+          <li id="li5" class="side-bar-elements" href="/"><a style="text-decoration:none;color:white"href="/profile/orders">Orders</a></li>
+          <li id="li6" class="side-bar-elements"><a href="/" style="text-decoration:none;color:white">Logout</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="right-section">
+      <div id="div1" class="personal-info">
+        <form class="pro" method="post" action="/profile">
+          <button id="editbtn" type="button"style="width:100px;height:40px"class="add-btn">Edit</button>
+          <h2>Personal Info</h2>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" value="<%=name%>" id="name" name="name" contenteditable="true" readonly>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" value="<%=email%>" id="email" name="email" contenteditable="true" readonly>
+          </div>
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" value="<%=address%>" id="addressLine1" name="address" contenteditable="true" readonly>
+            <input type="text" value="<%=city%>" id="state" name="state" contenteditable="true" readonly>
+            <input type="text" value="<%=state%>" id="city" name="city" contenteditable="true" readonly>
+            <input type="text" id="pincode" value="<%=pincode%>" name="pincode" contenteditable="true" readonly>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" value="<%=phone%>" contenteditable="true" readonly>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" value="Save" onclick="saveForm()">Save</button>
+          </div>
+        </form>
+      </div>
+    <!-- editbtn -->
+    <script>
+    let editbtn=document.getElementById("editbtn");
+    let inputs=document.querySelectorAll("input");
+    editbtn.addEventListener("click",function(){
+    for(var i=0;i<inputs.length;i++){
+      inputs[i].removeAttribute("readonly");
+    }
+  });
+  </script>
+
+      <!--   <div id="div3" class="products">
+        <div class="header">
+          <h2 class="heading-text">Your Products</h2>
+          <button id="add-button" class="add-button" onclick="openPop()">Add</button>
+        </div>
+        <div id="pop-up" class="pop-up">
+          <form name="myform"class="prod" method="post" onsubmit="return validateForm()">
+            <label for="prod_name">
+              Product Name:
+            </label>
+            <input  id="prod_name" placeholder="product name" pattern="^[a-zA-Z\s]+$" title="Enter Valid Product name" type="text" name="prod_name" required/>
+            <label>
+              Product Description:
+            </label>
+            <textarea id="prod_des" placeholder="product description" maxlength="100" name="description" rows="8" cols="80" required></textarea>
+            <label>Upload Product Image:</label>
+            <input type="file" name="img"/>
+            <div class="btn-style">
+              <button class="btn" type="submit"  >Add</button>
+              <button class="btn" type="button" onclick="closePop()" >cancel</button>
+            </div>
+
+          </form>
+
+        </div>
+        <script>
+          let popup=document.getElementById("pop-up");
+          function openPop(){
+          popup.classList.add("open-popup");
+        }
+        function closePop(){
+          popup.classList.remove("open-popup");
+        }
+        function validateForm(){
+          let prod_name=document.getElementById("prod_name").value;
+          let prod_des=document.getElementById("prod_des").value;
+
+          if(prod_name.length<=2){
+            alert(prod_name+"is not valid");
+            return false;
+          }else if(prod_des.trim()==" " || prod_des.length<=10){
+            alert("Give more description about product");
+            return false;
+          }else{
+            return true;
+          }
+
+        }
+        </script>-->
+      <!-- <div class="prod-container">
+          <div class="photo-gallery">
+            <div class="column">
+              <div class="photo-item">
+                <img src="./tomato.jpg" alt="" />
+                <div class="card-container">
+                  <h4 class="prod-header"><b>Tomato</b></h4>
+                  <div id="icon">
+                    <i id="ic" class="fa-solid fa-pen-to-square"></i>
+                    <i id="ic" class="fa-solid fa-trash"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="photo-item">
+                <img src="./potato.jpeg" alt="" />
+                <div class="card-container">
+                  <h4 class="prod-header"><b>Potato</b></h4>
+                  <div id="icon">
+                    <i id="ic" class="fa-solid fa-pen-to-square"></i>
+                    <i id="ic" class="fa-solid fa-trash"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="photo-item">
+                <img src="./carrot.jpeg" alt="" />
+                <div class="card-container">
+                  <h4 class="prod-header"><b>Carrot</b></h4>
+                  <div id="icon">
+                    <i id="ic" class="fa-solid fa-pen-to-square"></i>
+                    <i id="ic" class="fa-solid fa-trash"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="photo-item">
+                <img src="./watermelon.jpeg" alt="" />
+                <div class="card-container">
+                  <h4 class="prod-header"><b>Watermelon</b></h4>
+                  <div id="icon">
+                    <i id="ic" class="fa-solid fa-pen-to-square"></i>
+                    <i id="ic" class="fa-solid fa-trash"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="photo-item">
+                <img src="./mango.jpeg" alt="" />
+                <div class="card-container">
+                  <h4 class="prod-header"><b>Mango</b></h4>
+                  <div id="icon">
+                    <i id="ic" class="fa-solid fa-pen-to-square"></i>
+                    <i id="ic" class="fa-solid fa-trash"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="photo-item">
+                <img src="./orange.jpeg" alt="" />
+                <div class="card-container">
+                  <h4 class="prod-header"><b>Orange</b></h4>
+                  <div id="icon">
+                    <i id="ic" class="fa-solid fa-pen-to-square"></i>
+                    <i id="ic" class="fa-solid fa-trash"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="photo-item">
+                <img src="./grapes.jpg" alt="" />
+                <div class="card-container">
+                  <h4 class="prod-header"><b>Grapes</b></h4>
+                  <div id="icon">
+                    <i id="ic" class="fa-solid fa-pen-to-square"></i>
+                    <i id="ic" class="fa-solid fa-trash"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="photo-item">
+                <img src="./rice.jpeg" alt="" />
+                <div class="card-container">
+                  <h4 class="prod-header"><b>Rice</b></h4>
+                  <div id="icon">
+                    <i id="ic" class="fa-solid fa-pen-to-square"></i>
+                    <i id="ic" class="fa-solid fa-trash"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="photo-item">
+                <img src="./apple.jpeg" alt="" />
+                <div class="card-container">
+                  <h4 class="prod-header"><b>Apple</b></h4>
+                  <div id="icon">
+                    <i id="ic" class="fa-solid fa-pen-to-square"></i>
+                    <i id="ic" class="fa-solid fa-trash"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="div4" class="sales">
+        <div class="sales-graph">
+          <div class="sales-button">
+            <button class="sbutton">Monthly</button>
+            <button class="sbutton">Yearly</button>
+          </div>
+          <div class="graph">
+            <div>
+              <canvas id="myChart"></canvas>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            <script>
+              const ctx = document.getElementById('myChart');
+
+              new Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                  datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                  }]
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true
+                    }
+                  }
+                }
+              });
+            </script>
+
+          </div>
+        </div>
+
+      </div>
+      <div id="div5" class="orders"></div>-->
+
+    </section>
+  </div>
+
+</body>

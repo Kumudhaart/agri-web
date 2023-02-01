@@ -1,0 +1,138 @@
+
+<head>
+    <meta charset="utf-8">
+    <title>Profile Page</title>
+    <link rel="stylesheet" type="text/css" href="/Styles/fprofile.css">
+    <script src="https://kit.fontawesome.com/ee292cad92.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.1.0/papaparse.min.js"></script>
+  
+  
+  
+    <script>
+      $(document).ready(function() {
+        $("#li1").click(function() {
+          $("#div1").show();
+          $("#div2,#div3,#div4,#div5").hide();
+        });
+        $("#li2").click(function() {
+          $("#div2").show();
+          $("#div1,#div3,#div4,#div5").hide();
+        });
+        $("#li3").click(function() {
+          $("#div3").show();
+          $("#div1,#div2,#div4,#div5").hide();
+        });
+        $("#li4").click(function() {
+          $("#div4").show();
+          $("#div1,#div2,#div3,#div5").hide();
+        });
+        $("#li5").click(function() {
+          $("#div5").show();
+          $("#div1,#div2,#div3,#div4").hide();
+        });
+      });
+    </script>
+  </head>
+  
+  <body>
+<div class="container">
+    <section class="left-section">
+      <div class="left">
+        <div class="go-back">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <div class="profile">
+          <img id="photo" class="profile-pic" src="/images/profile.jpg" alt="profile_pic" />
+
+          <input type="file" id="file" />
+          <label for="file" id="uploadbtn">Choose Profile</label>
+        </div>
+        <div class="name">
+          <h1 class="h1">Username</h1>
+          <h4 class="h4">profession</h4>
+        </div>
+        <ul class="side-bar">
+          <li id="li1" class="side-bar-elements" href="/"><a style="text-decoration:none;color:white" href="/profile">Profile</a></li>
+          <li id="li2" class="side-bar-elements" href="/"><a style="text-decoration:none;color:white" href="/profile/account">Account Details</a></li>
+          <li id="li3" class="side-bar-elements" href="/"><a style="text-decoration:none;color:white"href="/profile/products">Products</a></li>
+          <li id="li4" class="side-bar-elements" href="/"><a style="text-decoration:none;color:white"href="/profile/sales">Sales</a></li>
+          <li id="li5" class="side-bar-elements" href="/"><a style="text-decoration:none;color:white"href="/profile/orders">Orders</a></li>
+          <li id="li6" class="side-bar-elements"><a href="/" style="text-decoration:none;color:white">Logout</a></li>
+        </ul>
+      </div>
+    </section>
+  <section class="right-section">
+    <div id="div3" class="products">
+        <div class="header">
+          <h2 class="heading-text">Your Products</h2>
+          <button id="add-button" class="add-button" onclick="openPop()">Add</button>
+        </div>
+        <div id="pop-up" class="pop-up">
+          <form name="myform"class="prod" method="post" onsubmit="return validateForm()">
+            <label for="prod_name">
+              Product Name:
+            </label>
+            <input  id="prod_name" placeholder="product name" pattern="^[a-zA-Z\s]+$" title="Enter Valid Product name" type="text" name="prod_name" required/>
+            <label>
+              Product Description:
+            </label>
+            <textarea id="prod_des" placeholder="product description" maxlength="100" name="description" rows="8" cols="80" required></textarea>
+            <label>Upload Product Image:</label>
+            <input type="file" name="img"/>
+            <div class="btn-style">
+              <button class="btn" type="submit"  >Add</button>
+              <button class="btn" type="button" onclick="closePop()" >cancel</button>
+            </div>
+
+          </form>
+
+        </div>
+        <script>
+          let popup=document.getElementById("pop-up");
+          function openPop(){
+          popup.classList.add("open-popup");
+        }
+        function closePop(){
+          popup.classList.remove("open-popup");
+        }
+        function validateForm(){
+          let prod_name=document.getElementById("prod_name").value;
+          let prod_des=document.getElementById("prod_des").value;
+
+          if(prod_name.length<=2){
+            alert(prod_name+"is not valid");
+            return false;
+          }else if(prod_des.trim()==" " || prod_des.length<=10){
+            alert("Give more description about product");
+            return false;
+          }else{
+            return true;
+          }
+
+        }
+        </script>
+      <%  if(arr.length!=0){ %>
+             <% for (var i=0;i<arr.length;i++){ %>
+                <div class="prod-container">
+                    <div class="photo-gallery">
+                      <div class="column">
+                        <div class="photo-item">
+                          <img src="./tomato.jpg" alt="" />
+                          <div class="card-container">
+                            <h4 class="prod-header"><b><%=arr[i].prod_name %></b></h4>
+                            <p><%=arr[i].prod_des %></p>
+                            <div id="icon">
+                              <i id="ic" class="fa-solid fa-pen-to-square"></i>
+                              <i id="ic" class="fa-solid fa-trash"></i>
+                            </div>
+                          </div>
+                        </div>
+            
+
+           <% } %>
+        <%}%> 
+
+       </section>
+  </div>

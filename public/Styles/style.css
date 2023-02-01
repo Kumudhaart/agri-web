@@ -1,0 +1,124 @@
+*{
+  margin:0;
+  padding:0;
+}
+:root{
+  --green: #198754;
+  --lgreen:#198754;
+  --white:white;
+}
+input{
+  width:500% !important;
+}
+.banner{
+  width:100% !important;
+  height:500px !important;
+}
+.cont{
+  position:relative;
+  bottom:20%;
+}
+.btn1{
+  position:absolute;
+  left:42%;
+  top:50%;
+}
+.btn2{
+  position:absolute;
+  left:52%;
+  top:50%;
+}
+.a-btn{
+  text-decoration:none;
+  color:white;
+}
+.a-btn:hover{
+  color:green;
+}
+a.nav:hover{
+  border-radius:.25rem;
+}
+a.nav:hover,.btn1:hover,.btn2:hover{
+  background-color:white !important;
+  color:green !important;
+}
+.pos{
+  position:absolute;
+  text-align:center;
+  top:20%
+}
+.foot{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  background-color: var(--green);
+
+}
+.p-foot{
+  margin:20px;
+  color:var(--white);}
+.copy{
+  background-color: var(--green);
+  color:var(--white);
+  text-align:center;
+  padding-bottom: 20px;
+  }
+/*sign-up intermediate */
+.bg{
+  background-color:var(--lgreen);
+}
+.div-padding{
+  padding-top:10%;
+  padding-bottom: 10%;
+}
+.flex-box{
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+}
+.center{
+  display:block;
+  padding-top:10px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.head-p{
+  margin:0;
+  padding:0;
+}
+.box{
+  text-align: center;
+  border:5px solid var(--white);
+  color:var(--white);
+  padding:20px 120px;
+  border-radius: 20px;
+}
+/*.box:hover{
+  background-color: var(--white);
+  color:var(--lgreen) !important;
+  outline-color: var(--green) !important;
+}*/
+.icon{
+  font-size:30px;
+  margin-right:20px;
+}
+.btn-prop{
+  color:var(--white);
+  border:2px solid var(--white);
+  font-size: 30px;
+  border-radius: 100%;
+  margin-left:10%;
+}
+/* carousel-img */
+.carousel-img{
+  height:300px !important;
+}
+.age,.name,.pass{
+  margin:0;
+  padding:0;
+  color:red;
+  font-size: medium;
+  font-weight: lighter;
+}
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Customer signup</title>
+        <link rel="stylesheet" type="text/css" href="Styles/cstyle.css">
+        
+<script>
+  function validateForm(){
+    let x=document.forms["myform"]["name"].value;
+    let age=document.forms["myform"]["age"].value;
+    let password1=document.forms["myform"]["password1"].value;
+    let password=document.forms["myform"]["password"].value;
+    document.querySelector(".name").innerHTML="";
+    document.querySelector(".age").innerHTML="";
+    document.querySelector(".pass").innerHTML="";
+    
+    
+    if(x.length<=2){
+       document.querySelector(".name").innerHTML="enter valid name";
+       alert("Give Valid Details");
+       return false;
+    }
+    else if(age.length>=3 || Number(age)<=20)
+    {
+      document.querySelector(".age").innerHTML="enter valid age";
+      alert("enter valid details");
+      return false;
+    }
+    else if(password!=password1)
+    {
+      document.querySelector(".pass").innerHTML="Password did not match";
+      alert("password did not match");
+      return false;
+    }else{
+      return true;
+  }
+}
+  </script>
+    </head>
+    <body>
+      <div class="bg">
+        <form name="myform" action="/customer.html" method="post" onsubmit="return validateForm()">
+            <h2>Sign Up</h2>
+            <div class="form-group">
+              <label for="name">Name: *</label>
+              <input type="text" pattern="^[a-zA-Z\s]+$" id="name" name="name" placeholder="Enter your name" required>
+              <h6 class="name"></h6>
+            </div>
+            <div class="form-group">
+              <label for="DOB">DOB *</label>
+              <input max="2003-12-31" type="date" id="date" name="date" placeholder="Enter your date" required>
+            </div>
+            <div class="form-group">
+              <label for="age">Age: *</label>
+              <input type="text" id="age" name="age" placeholder="Enter your age"required>
+              <h6 class="age"></h6>
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail: *</label>
+              <input type="email"  pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+    
+            <div class="form-group">
+              <label for="address">Address: *</label>
+              <input type="text" id="addressLine1" name="address" placeholder="address">
+              <input type="text" id="state" name="state"  pattern="^[a-zA-Z\s]+$" placeholder="state" required>
+              <input type="text" id="city" pattern="^[a-zA-Z\s]+$" name="city" placeholder="city"required>
+              <input type="text" id="pincode" name="pincode" maxlength="6" placeholder="pincode" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone: *</label>
+              <input type="tel" pattern="^[6-9]\d{9}$" id="phone" name="phone" placeholder="Enter your Phone number" required>
+            </div>
+            <label for="password">Password: *</label>
+              <input type="password" id="password" name="password1" placeholder="password should contain special character" required>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password: *</label>
+              <input type="password" id="confirmPassword" name="password" placeholder="retype the password"required>
+              <h6 class="pass"></h6>
+            </div>
+            <div class="clearfix">
+              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+              <button type="submit" class="signupbtn">Sign Up</button>
+            </div>
+          </form>
+      </div>
+    </body>
+</html>

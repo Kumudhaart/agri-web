@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: rgba(8, 8, 8, 0.2);
+        }
+
+        .product-list {
+            margin: 0 auto;
+            display: inline-block;
+        }
+        .bg{
+            background-image: url('images/bg.jpg');
+            background-size: cover;
+            background-position: center;
+
+        }
+        .innerdiv{
+            padding-top:100px;
+        }
+
+        .filters {
+            margin-bottom: 20px;
+            display: grid;
+            align-content:center;
+        }
+
+        
+        .filters {
+            width: 100%;
+            margin-top: 30px;
+            justify-content: space-between;
+        }
+
+       
+        .searchbar {
+            position: relative;
+            top: 0;
+            width: 100%;
+            margin-left: 50px;
+            text-align: center;
+        }
+
+        .input {
+            border: 5px;
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            width: 80%;
+            border-radius: 15px;
+            background-color: rgba(255,255,255,0.8);
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+        }
+
+        input::placeholder {
+            text-align: center;
+            color:black;
+
+        }
+
+        .search {
+            right: 0;
+            margin-top: 8px;
+            margin-left: 10px;
+            margin-right: 16px;
+            background: rgba(11, 167, 35, 0.76);
+            cursor: pointer;
+            width: 100px;
+            border: 3px;
+            border-radius: 10px;
+        }
+
+            .search:hover {
+                background-color: rgba(4, 90, 8, 0.94);
+                color: white;
+            }
+
+        .fa-search {
+            color: gray;
+            font-size: 17px;
+        }
+
+        .flex-label {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-select {
+            width: 200px;
+        }
+
+        .searching {
+            margin-left: 150px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Gill Sans", sans-serif;
+        }
+
+        .container {
+            padding:30px 5%;
+        }
+
+        .heading-text {
+            margin-bottom: 2rem;
+        }
+
+        .photo-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+            .photo-gallery .column {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+        .photo-item img {
+            width: 100%;
+            border-radius: 10px;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media only screen and (min-width: 768px) {
+          
+            .photo-gallery {
+                flex-direction: row;
+            }
+        }
+
+        .photo-item {
+            position: relative;
+            cursor: pointer;
+            height: 300px;
+            width: 400px;
+            padding: 20px 20px 20px 20px;
+        }
+
+        .overlay {
+            position: absolute;
+            background-color: rgba(65, 65, 65, 0.313);
+            top: 0;
+            left: 0;
+            transform: scale(0);
+            transition: all 0.2s 0.1s ease-in-out;
+            color: rgb(255, 255, 255);
+            align-items: center;
+            justify-content: center;
+            width: 400px;
+            border-radius: 10px;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .photo-item:hover .overlay {
+            transform: scale(1);
+        }
+        .state{
+            margin:0px 30px 0px 30px;
+            display:flex;
+            color:white;
+        }
+        .district {
+            margin: 0px 30px 0px 30px;
+            display:flex;
+            color:white;
+            
+        }
+        .filterbutton {
+            margin: 0px 30px 0px 30px;
+        }
+        .form-control1{
+            position:relative;
+            left:150%;
+            display:inline-block;
+            width:150px;
+            border-radius:15px;
+            border:none;
+            margin: 5px 0px 0px 0px; 
+            background-color: rgba(255,255,255,0.8);
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+        }
+        .form-control1:hover{
+            border:1px solid black;
+            box-shadow: rgba(0,0,0,0.8) 5px 5px ;
+        }
+        .form-select{
+background-color: rgba(255,255,255,0.8);
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+            position:relative;
+            left:95%;
+        }
+       .districtlabel, .statelabel {
+            margin: 5px 5px 0px 0px;
+            position:relative;
+            left:90%;
+        }
+        
+        .text-overlay {
+            position: absolute;
+            top: 10;
+            left: 10;
+            color: black;
+            display: flex;
+            align-content:space-between;
+        }
+        .see-more-link{
+            margin-left:210px;
+        }
+        .available {
+            width: 200px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .bg2{
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="innerdiv">
+            <div class="search-bar">
+                <form class=searching>
+                    <input role="search" class="input" type="text" placeholder="search items here" name="search">
+                    <button class="search" type="submit">search</button>
+                </form>
+            </div>
+            <div class="product-list">
+                <div class="filters">
+                    <form class="flex-label">
+                        <div class="state">
+                            <label class="statelabel" for="state">State:</label>
+                            <select class="form-select" id="state">
+                                <option value="all">Select State</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Ladakh">Ladakh</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Puducherry">Puducherry</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                            </select>
+                        </div>
+                        <div class="district">
+                            <label class="districtlabel" for="district">District:</label>
+                            <select class="form-select" id="district">
+                                <option value="all">Select District</option>
+                                <option value="Ariyalur">Ariyalur</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Coimbatore">Coimbatore</option>
+                                <option value="Cuddalore">Cuddalore</option>
+                                <option value="Dharmapuri">Dharmapuri</option>
+                                <option value="Dindigul">Dindigul</option>
+                                <option value="Erode">Erode</option>
+                                <option value="Kanchipuram">Kanchipuram</option>
+                                <option value="Kanyakumari">Kanyakumari</option>
+                                <option value="Karur">Karur</option>
+                                <option value="Krishnagiri">Krishnagiri</option>
+                                <option value="Madurai">Madurai</option>
+                                <option value="Nagapattinam">Nagapattinam</option>
+                                <option value="Namakkal">Namakkal</option>
+                                <option value="Perambalur">Perambalur</option>
+                                <option value="Pudukkottai">Pudukkottai</option>
+                                <option value="Ramanathapuram">Ramanathapuram</option>
+                                <option value="Salem">Salem</option>
+                                <option value="Sivaganga">Sivaganga</option>
+                                <option value="Thanjavur">Thanjavur</option>
+                                <option value="The Nilgiris">The Nilgiris</option>
+                                <option value="Theni">Theni</option>
+                                <option value="Thoothukudi">Thoothukudi</option>
+                                <option value="Tiruchirappalli">Tiruchirappalli</option>
+                                <option value="Tirunelveli">Tirunelveli</option>
+                                <option value="Tiruppur">Tiruppur</option>
+                                <option value="Tiruvallur">Tiruvallur</option>
+                                <option value="Tiruvannamalai">Tiruvannamalai</option>
+                                <option value="Vellore">Vellore</option>
+                                <option value="Viluppuram">Viluppuram</option>
+                                <option value="Virudhunagar">Virudhunagar</option>
+                            </select>
+                        </div>
+                        <div class="filterbutton">
+                            <input class="form-control1" type="submit" value="Filter">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg2">
+        <div class="container">
+            <h2 class="heading-text">Farmers & their Products</h2>
+            <div class="photo-gallery">
+                <div class="column">
+                    <div class="photo-item">
+                        <img src="images/farmer1.jpg" alt="" />
+                        <div class="text-overlay">
+                            <p>Username</p>
+                            <a href="" class="see-more-link">See More</a>
+                        </div>
+                        <div class="overlay">
+                            <div class="available">
+                                <span>Available Items</span>
+                                <ul>
+                                    <li>fruits</li>
+                                    <li>vegetables</li>
+                                    <li>wheat</li>
+                                    <li>flowers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="photo-item">
+                        <img src="images/farmer2.jpg" alt="" />
+                        <div class="text-overlay">
+                            <p>Username</p>
+                            <a href="" class="see-more-link">See More</a>
+
+                        </div>
+                        <div class="overlay">
+                            <div class="available">
+                                <span>Available Items</span>
+                                <ul>
+                                    <li>fruits</li>
+                                    <li>vegetables</li>
+                                    <li>rice</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/farmer3.jpg" alt="" />
+                        <div class="text-overlay">
+                            <p>Username</p>
+                            <a href="" class="see-more-link">See More</a>
+                        </div>
+                        <div class="overlay">
+                            <div class="available">
+                                <span>Available Items</span>
+                                <ul>
+                                    <li>fruits</li>
+                                    <li>vegetables</li>
+                                    <li>rice</li>
+                                    <li>flowers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="photo-item">
+                        <img src="images/farmer4.jpg" alt="" />
+                        <div class="text-overlay">
+                            <p>Username</p>
+                            <a href="" class="see-more-link">See More</a>
+                        </div>
+                        <div class="overlay">
+                            <div class="available">
+                                <span>Available Items</span>
+                                <ul>
+                                    <li>onion</li>
+                                    <li>rice</li>
+                                    <li>flowers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/farmer5.jpg" alt="" />
+                        <div class="text-overlay">
+                            <p>Username</p>
+                            <a href="" class="see-more-link">See More</a>
+                        </div>
+                        <div class="overlay">
+                            <div class="available">
+                                <span>Available Items</span>
+                                <ul>
+                                    <li>fruits</li>
+                                    <li>millets</li>
+                                    <li>flowers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/farmer6.jpg" alt="" />
+                        <div class="text-overlay">
+                            <p>Username</p>
+                            <a href="" class="see-more-link">See More</a>
+                        </div>
+                        <div class="overlay">
+                            <div class="available">
+                                <span>Available Items</span>
+                                <ul>
+                                    <li>vegetables</li>
+                                    <li>ragi</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="photo-item">
+                        <img src="images/farmer7.jpg" alt="" />
+                        <div class="text-overlay">
+                            <p>Username</p>
+                            <a href="" class="see-more-link">See More</a>
+                        </div>
+                        <div class="overlay">
+                            <div class="available">
+                                <span>Available Items</span>
+                                <ul>
+                                    <li>vegetables</li>
+                                    <li>rice</li>
+                                    <li>flowers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/farmer8.jpg" alt="" />
+                        <div class="text-overlay">
+                            <p>Username</p>
+                            <a href="" class="see-more-link">See More</a>
+                        </div>
+                        <div class="overlay">
+                            <div class="available">
+                                <span>Available Items</span>
+                                <ul>
+                                    <li>apple</li>
+                                    <li>vegetables</li>
+                                    <li>rice</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/farmer9.jpg" alt="" />
+                        <div class="text-overlay">
+                            <p>Username</p>
+                            <a href="" class="see-more-link">See More</a>
+                        </div>
+                        <div class="overlay">
+                            <div class="available">
+                                <span>Available Items</span>
+                                <ul>
+                                    <li>orange</li>
+                                    <li>vegetables</li>
+                                    <li>flowers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
